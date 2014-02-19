@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
+  <versionNumber>2.9.0</versionNumber>
+  <url>http://www.bpllive.com/updategreenscreen/air_updater_flex.air</url>
+  <description>
+    <text xml:lang="en">English description</text>
+    <text xml:lang="fr">French description</text>
+    <text xml:lang="ro">Romanian description</text>
+  </description>
+</update>
