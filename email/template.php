@@ -42,9 +42,7 @@ function email_template($part_string){
 											<td align="right" width="30">
 												<a href="https://twitter.com/intent/tweet?text='.$blocks[$p]['twitter'].'+#image_'.$p.'_shortlink_enc#"><img src="http://www.bpllive.com/email/img/twitter.gif" alt="" width="25" height="25" /></a>
 											</td>
-											<td align="right" width="30">
-												<a href="http://www.tumblr.com/share/photo?source=#image_'.$p.'_enc#&caption='.$blocks[$p]['tumblr'].'&click_thru=http%3A%2F%2Fwww.bpllive.com%2F"><img src="http://www.bpllive.com/email/img/tumblr.gif" alt="" width="25" height="25" /></a>
-											</td>
+											
 										<tr>
 									</table>';
 	}
