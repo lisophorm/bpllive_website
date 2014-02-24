@@ -2,6 +2,12 @@
 require_once('Connections/php.mysql.class.php');
 error_reporting(E_ALL);
 
+if(isset($_GET['urn'])) {
+	$currentURN=$_GET['urn'];
+} else {
+	$currentURN="A1393253207071Z";
+}
+
 // DUPLICATE FUNCTION FOR TESTING
 function shortenURL($url) {
 	$result=file_get_contents("http://is.gd/create.php?format=simple&url=".$url);
@@ -31,22 +37,26 @@ r.game1 AS game1,
 r.game2 AS game2,
 userphoto.filename AS imgtrophy,
 dreamteams.filename AS imgdreamteam
-from ((((`users` `c` left join `scores` `r` on((`r`.`urn` = `c`.`urn`))) left join `userphoto` on((`c`.`urn` = `userphoto`.`urn`))) left join `dreamteams` on((`c`.`urn` = `dreamteams`.`urn`))) join `teams` on((`c`.`team_id` = `teams`.`id`)))
+from ((((`users` `c` left join `scores` `r` on((`r`.`urn` = `c`.`urn`))) left join `userphoto` on((`c`.`urn` = `userphoto`.`urn`))) left join `dreamteams` on((`c`.`urn` = `dreamteams`.`urn`))) left join `teams` on((`c`.`team_id` = `teams`.`id`)))
 WHERE
-c.urn='A1393032123627Z'
-");
+c.urn='".$currentURN."' limit 1");
 
-var_dump($user);
-echo "error:".$db->lastError;
+//var_dump($user);
+//echo "error:".$db->lastError;
 if (!$user) {
 	die("mysql error:"+$db->lastError+" query:"+$db->lastQuery);
 } else {
 	var_dump($user);
-	echo "<br/>name:".$user['firstname'];
+	
+	echo "<br/>unique id:".$user['uniqueid']."<br/>";
+	//echo "<br/>name:".$user['firstname'];
 	$urn=$user['uniqueid'];
-	echo "total rows:".$db->records;
+	//echo "total rows:".$db->records;
 }
-echo "<br/><br/>";
+
+echo "query: -".$db->lastQuery."<br/>";
+
+//echo "<br/><br/>";
 
 // Static Vars
 $url = 'http://www.bpllive.com';
@@ -143,8 +153,17 @@ $body=str_replace("#club_name_enc#",$club_name_enc,$body);
 $body=str_replace("#club_badge_85#",$club_badge_85,$body);
 $body=str_replace("#club_badge_200#",$club_badge_200,$body);
 
+
+function get_file_extension($file_name) {
+	return substr(strrchr($file_name,'.'),1);
+}
+
 function makeThumb($filename,$newwidth,$destpath) {
 	global $url;
+	
+	if(get_file_extension($filename)!="jpg") {
+		return false;
+	}
 /*
  * PHP GD
  * resize an image using GD library
@@ -186,13 +205,14 @@ if(!imagejpeg($thumb,$newpath,90)) {
 
 function makeThumbPNG($filename,$newwidth,$destpath) {
 global $url;
-/*
- * PHP GD
- * resize an image using GD library
- */
+
+
+	if(get_file_extension($filename)!="png") {
+		return false;
+	}
 
 if(!file_exists($filename)) {
-	die("file non trovato".$filename);
+	return false;
 }
 
 

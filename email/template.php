@@ -116,8 +116,10 @@ function email_template($part_string){
 					$html .= '<img src="#image_'.$parts[$p].'#" alt="" width="280" height="141" style="padding-top:12px;padding-bottom:12px;" />';
 				} elseif($parts[$p]=='s'){
 					$html .= '<img src="#image_'.$parts[$p].'#" alt="" width="280" height="141" />';
-				} else {
+				} elseif($parts[$p]=='d') {
 					$html .= '<img src="#image_'.$parts[$p].'#" alt="" width="280" height="165" />';
+				} else {
+					$html .= '<img src="#image_'.$parts[$p].'#" alt="" width="280" height="210" />';
 				}
 				$html .= share($parts[$p],$blocks);
 					
