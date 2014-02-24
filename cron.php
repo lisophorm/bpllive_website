@@ -8,6 +8,8 @@
 <body>
 
 <?php
+die($_SERVER['DOCUMENT_ROOT']);
+
 $_SERVER['DOCUMENT_ROOT'] = dirname(__FILE__);
 echo "server root:".$_SERVER['DOCUMENT_ROOT'];
 

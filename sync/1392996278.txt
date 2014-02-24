@@ -1,0 +1,11 @@
+okArray
+(
+    [urn] => A1392827479371Z
+    [firstname] => Alfonso
+    [lastname] => Florio
+    [added] => 2014-02-19 16:31:47
+    [team_id] => 
+    [optInPremier] => 1
+    [optInClub] => 1
+    [optInBarclays] => 1
+)

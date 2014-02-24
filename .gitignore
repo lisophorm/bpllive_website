@@ -7,6 +7,8 @@
 .metadata
 bin/
 tmp/
+email/scores/
+sitethumbs/
 *.tmp
 *.bak
 *.swp
