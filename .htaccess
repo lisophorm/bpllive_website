@@ -7,7 +7,7 @@ php_value error_reporting 7
 Options +FollowSymLinks
 RewriteEngine On
  
-#RewriteCond %{SCRIPT_FILENAME} !-d
-#RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
  
-#RewriteRule ^.*$ ./index.php
+RewriteRule ^.*$ ./index.php

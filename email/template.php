@@ -5,7 +5,7 @@ function email_template($part_string){
 	$parts = explode(',', $part_string);
 	$number_parts = count($parts);
 	$odd = true; if ($number_parts % 2 == 0) $odd = false;
-	
+		echo "<br/> <br/> number_parts $number_parts<br/>";
 	$blocks = array(
 		// Club Zone
 		'c'=>array(
@@ -29,7 +29,7 @@ function email_template($part_string){
 				'tumblr'=>urlencode("Here's how I did at the Skills Zone - head to Barclays Premier League Live and see if you can beat me...")
 			)
 	);
-	
+	if (!function_exists('share')) { 
 	function share($p, $blocks){
 		return '<table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-top: 10px;">
 										<tr>
@@ -46,7 +46,7 @@ function email_template($part_string){
 										<tr>
 									</table>';
 	}
-	
+	}
 	$html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -76,7 +76,7 @@ function email_template($part_string){
 							</tr>
 		 				</table>
    					</td></tr>';
-	
+
 	for($i=0;$i<$number_parts+1;$i++):
 		
 		if($i%2==0):

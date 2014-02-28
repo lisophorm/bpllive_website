@@ -296,14 +296,14 @@ if ( count( $users ) > 0 ) {
 	//$basefile=urldecode(basename($_POST['file']));
 	//$mail->AddEmbeddedImage($_SERVER['DOCUMENT_ROOT']."/rendered/".$basefile,"logo_2u",$basefile); // attachment
 	
-	if(!$mail->Send()) {
+	/*if(!$mail->Send()) {
 	  $emailresult= $mail->ErrorInfo;
 
 	} else {
 	 $emailresult="SUCCESS";
-	}
+	}*/
 	
-	$result=$db->Update("users",array("issynced"=>1,"server_result"=>$emailresult),array("urn"=>$urn ));
+	//$result=$db->Update("users",array("issynced"=>1,"server_result"=>$emailresult),array("urn"=>$urn ));
 
 	
 	if(!$result) {
