@@ -17,7 +17,7 @@
 <div class="col-x1 block">
 	<h3 class="butt">PITCH ZONE</h3>
 	<p><?php display_img('whats-on/pitch-zone',$device,'jpg','one_col') ?></p>
-	<p class="last">Join a Barclays League legend on the pitch or sharpen your skills with Barclays Premier League Club coaches. There are prizes to be won all day in our fun football games. </p>
+	<p class="last">Join a Barclays Premier League legend on the pitch or sharpen your skills with Barclays Premier League Club coaches. There are prizes to be won all day in our fun football games. </p>
 </div>
 
 <div class="col-x1 block end">
@@ -54,16 +54,17 @@
 	<p class="last">Relax and enjoy your time at Barclays Premier League Live with our Food & Beverage zone in association with Carlsberg, the official beer of the Barclays Premier League. With fresh food stalls and bar facilities, you will find something to cater for every taste.</p>
 </div>
 
-<div class="col-x1 block">
+<div class="col-x1">
 	<h3 class="butt">MERCHANDISE ZONE</h3>
 	<p><?php display_img('whats-on/merchandise-zone',$device,'jpg','one_col') ?></p>
 	<p class="last">An exclusive shopping area where you can pick up your favourite Barclays Premier League football shirt and other Club products.</p>
 </div>
 
 <div class="col-x1 block end">
-	<h3 class="butt">BARCLAYS FAIR PLAY FOOTIE</h3>
-	<p><?php display_img('whats-on/fair-play',$device,'jpg','one_col') ?></p>
-	<p class="last">Challenge your friend to a game of 1-on-1 Barclays Fair Play Footie or if you are feeling confident test your skills against South Africa's champions. Barclays Fair Play Footie is designed to test and develop your one-touch reactions and encourages fair play.</p>
+	<h3 class="butt">BARCLAYS FAN ZONE</h3>
+	<p><?php display_img('whats-on/fan-zone',$device,'jpg','one_col') ?></p>
+	<p class="last">To all the fans who make the Barclays Premier League what it is, thank you.<br/><br/>Visit Barclays to have your free photo taken and tell them how you positively support your team. The best stories will be celebrated on Facebook and rewarded with prizes to say, thank you.'</p>
 </div>
+
 
 <div class="clear"></div>

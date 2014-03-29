@@ -1,0 +1,19 @@
+.social a {
+	display: block;
+	float: left;
+	height: 30px;
+	width: 30px;
+	text-indent: -1000px;
+}
+
+.social a.twitter {
+	background: url(../img/twitter.gif) 0 0 no-repeat;
+}
+
+.social a.facebook {
+	background: url(../img/facebook.gif) 0 0 no-repeat;
+}
+
+ol {
+	padding: 0 0 0 2em;
+}

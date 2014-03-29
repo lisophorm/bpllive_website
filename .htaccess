@@ -1,11 +1,32 @@
 php_flag  log_errors on
 php_value error_log  /var/www/vhosts/bpllive.com/httpdocs/PHP/PHP_errors.log
 
+
 php_flag display_errors on
 php_value error_reporting 7
 
 Options +FollowSymLinks
 RewriteEngine On
+
+#RewriteRule ^(.*)post_id.* / [L]
+#RewriteCond %{REQUEST_URI} post_id
+#RewriteRule .* index.php
+
+#RewriteRule ^(.*)post_id.* http://www.bpllive.com/ [L,R=301]
+#RewriteCond %{QUERY_STRING} post_id=(.*)$
+#RewriteRule (.*) /  [L]
+
+RewriteRule ^trophy/([^/]*)$ /showtrophy.php?share_type=EMAIL&urn=$1 [L]
+RewriteRule ^fbtrophy/([^/]*)$ /showtrophy.php?share_type=FACEBOOK&urn=$1 [L]
+RewriteRule ^ttrophy/([^/]*)$ /showtrophy.php?share_type=TWITTER&urn=$1 [L]
+
+RewriteRule ^dreamteam/([^/]*)$ /showdreamteam.php?share_type=EMAIL&urn=$1 [L]
+RewriteRule ^fbdreamteam/([^/]*)$ /showdreamteam.php?share_type=FACEBOOK&urn=$1 [L]
+RewriteRule ^tdreamteam/([^/]*)$ /showdreamteam.php?share_type=TWITTER&urn=$1 [L]
+
+RewriteRule ^skills/([^/]*)$ /showscores.php?share_type=EMAIL&urn=$1 [L]
+RewriteRule ^fbskills/([^/]*)$ /showscores.php?share_type=FACEBOOK&urn=$1 [L]
+RewriteRule ^tskills/([^/]*)$ /showscores.php?share_type=TWITTER&urn=$1 [L]
  
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f

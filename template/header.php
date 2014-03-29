@@ -44,7 +44,6 @@
 		 
 	</head>
 	<body class="<?php echo $device.' '.$page ?>">
-	
 	<div class="wrapper">
 	
 	<header>
@@ -80,6 +79,11 @@
 				<div id="background">
 					<?php display_img('backgrounds/background01',$device,'jpg',508,320) ?>
 				</div>
+                            <div class="hashtag">
+            <a href="https://twitter.com/intent/tweet?button_hashtag=BPLLive" class="twitter-hashtag-button" data-url="http://www.bpllive.com">Tweet #BPLLive</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<br/>
+            </div>
 			</div>
 		<?php endif; ?>
 	
@@ -91,7 +95,12 @@
 			<div id="bbb">
 				<?php display_img('bbb',$device,'png',141,43) ?>
 			</div>
+            <div class="hashtag">
+            <a href="https://twitter.com/intent/tweet?button_hashtag=BPLLive" class="twitter-hashtag-button" data-url="http://www.bpllive.com">Tweet #BPLLive</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
 		</div>
+        
 		<?php endif; ?>
 		
 		<?php if(($device == 'desktop' && $page == 'index')||($page != 'index')): ?>

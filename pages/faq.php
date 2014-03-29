@@ -21,6 +21,7 @@
 		<ul class="last">
 			<li>All participants are advised that no firearms of any sort will be allowed into the event space.</li>
 			<li>Anyone entering Barclays Premier League Live will be subjected to a full body and bag search.</li>
+            <li>If you are under 16 you need to be accompanied by an adult. If you are under 18 you will not be served alcohol.</li>
 		</ul>
 	</div>
 	
@@ -39,7 +40,7 @@
 	<h3>Cash point / ATMs</h3>
 	
 	<div class="accordion-content">
-		<p class="last"><i class="fa fa-exclamation-triangle"></i> Not available at this event</p>
+		<p class="last">Available at this event.</p>
 	</div>
 	
 	<h3>Travel advice & onsite car parking</h3>

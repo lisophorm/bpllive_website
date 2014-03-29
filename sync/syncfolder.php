@@ -17,19 +17,21 @@ $input = file_get_contents('php://input');
   
   $result=$db->Insert($jsonObj['user'],"users");
   
-  $output="ok";
+  $output="user ok |";
   
   
   if(!$result) {
-		$output.= "! insert user:".$db->lastError."- q:".$db->lastQuery." ";
+		$output.= "! insert user:".$db->lastError."- q:".$db->lastQuery." |";
 	} 
 	
 	if(array_key_exists("dreamteam",$jsonObj)) {
 		$result=$db->Insert($jsonObj['dreamteam'],"dreamteams");
 		
 		  if(!$result) {
-				$output.= "!dreamteam:".$db->lastError."- q:".$db->lastQuery." ";
-			} 
+				$output.= "!dreamteam:".$db->lastError."- q:".$db->lastQuery." |";
+			} else {
+				$output.="dreamteam ok |";
+			}
 		
 	}
 	
@@ -37,8 +39,10 @@ $input = file_get_contents('php://input');
 		$result=$db->Insert($jsonObj['userphoto'],"userphoto");
 		
 		  if(!$result) {
-				$output.= "!userphoto:".$db->lastError."- q:".$db->lastQuery." ";
-			} 
+				$output.= "!userphoto:".$db->lastError."- q:".$db->lastQuery." |";
+			} else {
+				$output.="userphoto ok |";
+			}
 		
 	}
 	
@@ -48,7 +52,7 @@ $input = file_get_contents('php://input');
 		  if(!$result) {
 				$output.= "!scores:".$db->lastError."- q:".$db->lastQuery." ";
 			} else {
-				$output.="scores ok ";
+				$output.="scores ok |";
 			}
 		
 	}
@@ -58,7 +62,7 @@ $input = file_get_contents('php://input');
   
   $output.=print_r($jsonObj['user'],true);
   
-  file_put_contents(time().".txt",print_r($output,true) );
+  //file_put_contents(time().".txt",print_r($output,true) );
   
  echo $output;
   

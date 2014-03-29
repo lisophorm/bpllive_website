@@ -53,7 +53,7 @@ function makeThumb( $filename, $newwidth, $destpath )
      * resize an image using GD library
      */
     if ( !file_exists( $filename ) ) {
-        die( "file non trovato" . $filename );
+        return false;
     }
     list( $width, $height ) = getimagesize( $filename );
     if ( !$width ) {
@@ -62,10 +62,10 @@ function makeThumb( $filename, $newwidth, $destpath )
     $ratio     = $width / $height;
     $newheight = $newwidth * $ratio;
     // Load
-    $thumb     = imagecreatetruecolor( $newwidth, $newheight );
+    $thumb     = imagecreatetruecolor( 280, 210 );
     $source    = imagecreatefromjpeg( $filename );
     // Resize
-    imagecopyresized( $thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height );
+    imagecopyresized( $thumb, $source, 0, 0, 0, 0, 280, 210, $width, $height );
     // Output and free memory
     //the resized image will be 400x300
     $newpath = $destpath . "/" . basename( $filename );
@@ -75,37 +75,41 @@ function makeThumb( $filename, $newwidth, $destpath )
         return $url . "/" . $newpath;
     }
 }
-function makeThumbPNG( $filename, $newwidth, $destpath )
+function makeThumbDREAM( $filename, $newwidth, $destpath )
 {
-    global $url;
-    if ( get_file_extension( $filename ) != "png" ) {
+	global $url;
+    if ( get_file_extension( $filename ) != "jpg" ) {
         return false;
     }
+    /*
+     * PHP GD
+     * resize an image using GD library
+     */
     if ( !file_exists( $filename ) ) {
         return false;
     }
-    // Load
-    $thumb = imagecreatetruecolor( 286, 165 );
-    imagealphablending( $thumb, true );
-    $backgroundColor = imagecolorallocate( $thumb, 255, 255, 255 );
-    imagefill( $thumb, 0, 0, 0xffffff );
-    $source = imagecreatefrompng( $filename );
-    if ( !imagecolortransparent( $source, 0xffffff ) ) {
-        die( "no trasp" );
+    list( $width, $height ) = getimagesize( $filename );
+    if ( !$width ) {
+        return false;
     }
+    $ratio     = $width / $height;
+    $newheight = $newwidth * $ratio;
+    // Load
+    $thumb     = imagecreatetruecolor( 286, 165 );
+    $source    = imagecreatefromjpeg( $filename );
     // Resize
-    imagecopyresampled( $thumb, $source, 0, 0, 0, 0, 236, 165, 1000, 700 );
+    imagecopyresized( $thumb, $source, 0, 0, 0, 0, 286, 165, $width, $height );
     // Output and free memory
     //the resized image will be 400x300
     $newpath = $destpath . "/" . basename( $filename );
-    if ( !imagepng( $thumb, $newpath ) ) {
+    if ( !imagejpeg( $thumb, $newpath, 90 ) ) {
         return false;
     } else {
         return $url . "/" . $newpath;
     }
 }
-include( $_SERVER[ 'DOCUMENT_ROOT' ] . '/email/makescores.php' );
-include( $_SERVER[ 'DOCUMENT_ROOT' ] . '/email/template.php' );
+include( 'email/makescores.php' );
+include( 'email/template.php' );
 $db    = new MySQL( DB, DBUSER, DBPASS );
 $users = $db->ExecuteSQL( "SELECT distinct
 c.id AS id,
@@ -136,17 +140,25 @@ if ( !$users ) {
 }
 if($db->records==0) {
 	die("No records to process");
+} else if($db->records==1) {
+	$user=$users;
+	$users= array();
+	array_push($users,$user);
 }
 echo "query: -" . $db->lastQuery . "<br/>";
 if ( count( $users ) > 0 ) {
+	//die("total users".count($users));
     for ( $i = 0; $i < count( $users ); $i++ ) {
-        $user = $users[ $i ];
+       	$user = $users[ $i ];
         echo "<br/>unique id:" . $user[ 'uniqueid' ] . "<br/>";
         //echo "<br/>name:".$user['firstname'];
         $urn      = $user[ 'uniqueid' ];
-        //echo "total rows:".$db->records;
-        //echo "<br/><br/>";
-        // Static Vars
+		$result=$db->ExecuteSQL("insert ignore into stats (urn,added) values (".$user[ 'uniqueid' ].",NOW())");
+        $result=$db->Insert(array("urn"=>$user[ 'uniqueid' ] ),"stats",true);
+		if(!$result) {
+			die("error updating stats ".$db->lastQuery);
+		}
+
         $url      = 'http://www.bpllive.com';
         // User Vars
         $name     = ucfirst( $user[ 'firstname' ] );
@@ -174,10 +186,11 @@ if ( count( $users ) > 0 ) {
 			echo "<br/>Exit loop<br/>";
 			break;
 		}
-        $dreamteamphoto = makeThumbPNG( "bplphotos/" . $user[ 'imgdreamteam' ], 280, "sitethumbs/dream" );
+        $dreamteamphoto = makeThumbDREAM( "bplphotos/" . $user[ 'imgdreamteam' ], 280, "sitethumbs/dream" );
         $game0          = trim( $user[ 'game0' ] );
         $game1          = trim( $user[ 'game1' ] ); //Power
         $game2          = trim( $user[ 'game2' ] ); //Control
+		
         // Games
         $games          = '';
         $scores         = '';
@@ -213,24 +226,33 @@ if ( count( $users ) > 0 ) {
         if ( $clubzonephoto ) {
             $image_c               = $clubzonephoto;
             $image_c_enc           = urlencode( $image_c );
-            $image_c_shortlink     = shortenURL( $image_c );
+            $image_c_shortlink     = shortenURL( $url . "/ttrophy/" . $user[ 'uniqueid' ] );
             $image_c_shortlink_enc = urlencode( $image_c_shortlink );
             $body                  = str_replace( "#image_c#", $image_c, $body );
-            $body                  = str_replace( "#image_c_full#", $url . "/bplphotos/" . basename( $image_c ), $body );
+			$body                  = str_replace( "#facebook_c_link#", $url . "/fbtrophy/" . $user[ 'uniqueid' ], $body );
+			$body                  = str_replace( "#twitter_c_link#", $url . "/ttrophy/" . $user[ 'uniqueid' ], $body );
+            $body                  = str_replace( "#image_c_full#", $url . "/trophy/" . $user[ 'uniqueid' ], $body );
             $body                  = str_replace( "#image_c_enc#", $image_c_enc, $body );
             $body                  = str_replace( "#image_c_shortlink#", $image_c_shortlink, $body );
             $body                  = str_replace( "#image_c_shortlink_enc#", $image_c_shortlink_enc, $body );
+			
+			$result=$db->Update("userphoto",array("shortlink"=>$image_c_shortlink),array("urn"=>$user[ 'uniqueid' ] ));
+			
         }
         // Dream Team Photo
         if ( $dreamteamphoto ) {
             $image_d               = $dreamteamphoto;
             $image_d_enc           = urlencode( $image_d );
-            $image_d_shortlink     = shortenURL( $image_d );
+            $image_d_shortlink     = shortenURL( $url . "/tdreamteam/" . $user[ 'uniqueid' ] );
             $image_d_shortlink_enc = urlencode( $image_d_shortlink );
+			$body                  = str_replace( "#facebook_d_link#", $url . "/fbtrophy/" . $user[ 'uniqueid' ], $body );			
             $body                  = str_replace( "#image_d#", $image_d, $body );
             $body                  = str_replace( "#image_d_enc#", $image_d_enc, $body );
             $body                  = str_replace( "#image_d_shortlink#", $image_d_shortlink, $body );
             $body                  = str_replace( "#image_d_shortlink_enc#", $image_d_shortlink_enc, $body );
+			
+			$result=$db->Update("dreamteams",array("shortlink"=>$image_d_shortlink),array("urn"=>$user[ 'uniqueid' ] ));
+			
         }
         // Skills Zone Scores
         if ( $scores ) {
@@ -251,6 +273,7 @@ if ( count( $users ) > 0 ) {
         $club_name_enc  = urlencode( $teamname );
         $club_badge_85  = $url . '/email/img/badges_small/' . str_replace( ' ', '-', $teamname ) . '.gif';
         $club_badge_200 = $url . '/email/img/badges_large/' . str_replace( ' ', '-', $teamname ) . '.gif';
+		$body           = str_replace( "#urn#", $user[ 'uniqueid' ], $body );
         $body           = str_replace( "#club_name_enc#", $club_name_enc, $body );
         $body           = str_replace( "#club_badge_85#", $club_badge_85, $body );
         $body           = str_replace( "#club_badge_200#", $club_badge_200, $body );
@@ -259,7 +282,7 @@ if ( count( $users ) > 0 ) {
 		
 		// sends out the fuckin email
 		
-			require_once($_SERVER['DOCUMENT_ROOT'].'/phpmailer/class.phpmailer.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/phpmailer/class.phpmailer.php');
 	
 	$mail             = new PHPMailer(); // defaults to using php "mail()"
 	
@@ -278,20 +301,20 @@ if ( count( $users ) > 0 ) {
 	$mail->SetFrom("noreply@bpllive.com","Barclays");
 	$mail->CharSet="UTF-8";
 	
-	//$mail->AddAddress($user['email'],$user['firstname']." ".$user['lastname']);
+	$mail->AddAddress($user['email'],$user['firstname']." ".$user['lastname']);
 	//$mail->AddAddress("bratcliffe@wmgllc.com","Becca");
 	//$mail->AddAddress("emyhill@wmgllc.com","ed");
-	$mail->AddAddress("aflorio@wmgllc.com","Alfo");
+	//$mail->AddAddress("aflorio@wmgllc.com","Alfo");
 	
 	
-	$mail->Subject    = "Your BPLLive email -urn:".$urn;
-	//$mail->AddBCC("lisophorm@gmail.com","Alfonso");
+	$mail->Subject    = "Your BPLLive email";
+	$mail->AddBCC("lisophorm@gmail.com","Alfonso");
 	$mail->AltBody    = "Please use an html compatible viewer!\n\n"; // optional, comment out and test
 	
 	
 	$mail->MsgHTML($body);
 	
-	$mail->AddCustomHeader(sprintf( 'X-SMTPAPI: %s', '{"unique_args": {"urn":"'.$xml->urn.'"},"category": "BPLLive"}' ) );
+	$mail->AddCustomHeader(sprintf( 'X-SMTPAPI: %s', '{"unique_args": {"urn":"'.$urn.'"},"category": "BPLLive"}' ) );
 
 	//$basefile=urldecode(basename($_POST['file']));
 	//$mail->AddEmbeddedImage($_SERVER['DOCUMENT_ROOT']."/rendered/".$basefile,"logo_2u",$basefile); // attachment

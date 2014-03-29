@@ -21,7 +21,7 @@ For the purpose of the UK Data Protection Act 1998 ("DPA"), the data controllers
 
 <ul>
 <li>Information that you provide by filling in forms on our site https://www.barclayspremierleaguetrophytour.com. This includes information provided at the time of registering on our site, accessing information in connection with the BPLL, posting material, and/or requiring further services. We may also ask you for information when you report a problem with our site.</li>
-<li>If you request to be kept informed of services that we offer, we may collect your name and email address. You can opt-out of receiving information from us whenever you input personal data, or by sending an email to us at info@barclayspremierleaguetrophytour.com</li>
+<li>If you request to be kept informed of services that we offer, we may collect your name and email address. You can opt-out of receiving information from us whenever you input personal data, or by sending an email to us at info@bpllive.com</li>
 <li>If you contact us, we may keep a record of that correspondence.</li>
 <li>To provide you with information, products or services that you request from us, or which we feel may interest you, where you have consented to be contact for such purposes.</li>
 <li>To notify you about changes to our service.</li>
@@ -53,7 +53,7 @@ For the purpose of the UK Data Protection Act 1998 ("DPA"), the data controllers
 </ul>
 <h4>ACCESS TO YOUR PERSONAL DATA</h4>
 <ul>
-<li>You may access personal data relating to you which we hold by sending an email to info@barclayspremierleaguetrophytour.com.  However, there may be exceptions to this right so that access may be denied for example, where we consider that making the information available would reveal personal data about another person or where we are legally prevented from disclosing such information.</li>
+<li>You may access personal data relating to you which we hold by sending an email to info@bpllive.com.  However, there may be exceptions to this right so that access may be denied for example, where we consider that making the information available would reveal personal data about another person or where we are legally prevented from disclosing such information.</li>
 <li>You have the right to request us to rectify, block, erase or destroy any of your personal data which we hold which is inaccurate.</li>
 <li>If we refuse to provide you with access to your personal information, we will provide you with reasons for the refusal.</li>
 <li>You are not required to provide any personal information on the public areas of this website. However, you may choose to do so by completing the forms on various pages of the site.</li>
@@ -61,5 +61,5 @@ For the purpose of the UK Data Protection Act 1998 ("DPA"), the data controllers
 <h4>CHANGES TO OUR PRIVACY POLICY</h4>
 <p>This Privacy Policy may change from time to time as United Kingdom and international privacy laws and industry practices evolve. We will give you notice of any such changes we make to our privacy policy by posting the updated Privacy Policy on our website with a statement that indicates when the Privacy Policy was last updated. Your continued use of the website constitutes your acceptance of the changes to the policy. You can view the current version of this privacy policy which is in force from time to time by visiting www.bpllive.com</p>
 <h4>CONTACT</h4>
-<p>You may contact us at any time at info@barclayspremierleaguetrophytour.com  if you have any questions about the personal data which we hold about you.</p>
+<p>You may contact us at any time at info@bpllive.com  if you have any questions about the personal data which we hold about you.</p>
 <p>LAST UPDATED 17 FEBRUARY 2014</p>
